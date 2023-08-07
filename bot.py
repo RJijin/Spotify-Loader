@@ -15,7 +15,7 @@ try:
     OWNER_IDS = [int(x) for x in os.environ.get('OWNER_IDS', '809546777').split(' ')] # Your Telegram ID / Can be more than 1 ids
 except ValueError:
     OWNER_IDS = ''
-MONGODB = os.environ.get('MONGO_DB_URL', 'mongodb+srv://Jijin0078:Jijin0078@cluster0.nbtkq0p.mongodb.net/?retryWrites=true&w=majority') # Your Mongo DB URL
+MONGODB = os.environ.get('MONGO_DB_URL', 'mongodb+srv://Jijinr:jijin0078@cluster0.t4y6byl.mongodb.net/?retryWrites=true&w=majority') # Your Mongo DB URL
 
 if MONGODB:
     db = motor_asyncio.AsyncIOMotorClient(MONGODB)['spotifyloader']['users']
