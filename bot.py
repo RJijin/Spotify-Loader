@@ -2,7 +2,7 @@
 
 import os, time, shutil, random, glob, asyncio, uuid, shlex, re, pyromod.listen
 from typing import Tuple
-from pyrogram import Client, filters
+from pyrogram import Client, filters, enums
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 from pyrogram.errors import BadRequest, FloodWait
 from motor import motor_asyncio
@@ -111,7 +111,7 @@ Commands:
 - `/start` : Show start message''', 
         True,
         reply_markup=InlineKeyboardMarkup(START_BUTTONS),
-        parse_mode='markdown'
+        parse_mode=enums.ParseMode.MARKDOWN
     )
 
 @xbot.on_message(filters.regex(r'http.*:[/][/]open[.]spotify[.]com.(track|album|artist|playlist)', re.M) & OWNER_FILTER & filters.private)
@@ -161,7 +161,7 @@ async def search(bot, update):
         except FloodWait as e:
             await asyncio.sleep(e.x)
             await bot.send_audio(chat_id=update.from_user.id, audio=music)
-    await update.reply(f'Successfully uploaded {x}', parse_mode='markdown')
+    await update.reply(f'Successfully uploaded {x}', parse_mode=enums.ParseMode.MARKDOWN)
     shutil.rmtree(dirs)
     
 
@@ -199,7 +199,7 @@ async def callbacks(bot: Client, updatex: CallbackQuery):
         stats = await get_stats(update.from_user.id)
         await updatex.message.edit(
             f'Current Output Format: `{stats["output_format"]}`\n\nSelect one of the buttons below to change your output format.',
-            parse_mode='markdown'
+            parse_mode=enums.ParseMode.MARKDOWN
         )
         return await updatex.message.edit_reply_markup(
             InlineKeyboardMarkup([
@@ -228,7 +228,7 @@ async def callbacks(bot: Client, updatex: CallbackQuery):
         stats = await get_stats(update.from_user.id)
         await updatex.message.edit(
             f'Current Output Format: `{stats["output_format"]}`\n\nSelect one of the buttons below to change your output format.',
-            parse_mode='markdown'
+            parse_mode=enums.ParseMode.MARKDOWN
         )
         return await updatex.message.edit_reply_markup(
             InlineKeyboardMarkup([
@@ -251,7 +251,7 @@ async def callbacks(bot: Client, updatex: CallbackQuery):
         stats = await get_stats(update.from_user.id)
         await updatex.message.edit(
             f'Is Using Youtube: `{str(stats["use_youtube"])}`\n\nSelect one of the buttons below to change your is using youtube.',
-            parse_mode='markdown'
+            parse_mode=enums.ParseMode.MARKDOWN
         )
         return await updatex.message.edit_reply_markup(
             InlineKeyboardMarkup([
@@ -270,7 +270,7 @@ async def callbacks(bot: Client, updatex: CallbackQuery):
         stats = await get_stats(update.from_user.id)
         await updatex.message.edit(
             f'Is Using Youtube: `{str(stats["use_youtube"])}`\n\nSelect one of the buttons below to change your is using youtube.',
-            parse_mode='markdown'
+            parse_mode=enums.ParseMode.MARKDOWN
         )
         return await updatex.message.edit_reply_markup(
             InlineKeyboardMarkup([
@@ -285,7 +285,7 @@ async def callbacks(bot: Client, updatex: CallbackQuery):
         stats = await get_stats(update.from_user.id)
         await updatex.message.edit(
             f'Current Path Template: `{str(stats["path_template"])}`\n\nSelect one of the buttons below to change your current path template.',
-            parse_mode='markdown'
+            parse_mode=enums.ParseMode.MARKDOWN
         )
         return await updatex.message.edit_reply_markup(
             InlineKeyboardMarkup([
@@ -313,7 +313,7 @@ async def callbacks(bot: Client, updatex: CallbackQuery):
                     InlineKeyboardButton("Back", callback_data="back"),
                 ],
             ]),
-            parse_mode='markdown'
+            parse_mode=enums.ParseMode.MARKDOWN
         )
     if cb_data == 'back':
         await updatex.message.edit(
