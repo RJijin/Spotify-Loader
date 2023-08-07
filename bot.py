@@ -8,14 +8,14 @@ from pyrogram.errors import BadRequest, FloodWait
 from motor import motor_asyncio
 
 # Configs
-API_HASH = os.environ('API_HASH', '7ce9113e5ac18ab3cf866c0cfdf34fcc')# Your API HASH
-API_ID = int(os.environ('API_ID','1064529')) # Your API ID
-BOT_TOKEN = os.environ('BOT_TOKEN', '1704486899:AAHRED0NCLfRl8OKJdotZZ_60mFvtBdExfo') # Your Bot Token
+API_HASH = os.environ.get('API_HASH', '7ce9113e5ac18ab3cf866c0cfdf34fcc')# Your API HASH
+API_ID = int(os.environ.get('API_ID','1064529')) # Your API ID
+BOT_TOKEN = os.environ.get('BOT_TOKEN', '1704486899:AAHRED0NCLfRl8OKJdotZZ_60mFvtBdExfo') # Your Bot Token
 try:
-    OWNER_IDS = [int(x) for x in os.environ['OWNER_IDS'].split(' ')] # Your Telegram ID / Can be more than 1 ids
+    OWNER_IDS = [int(x) for x in os.environ.get('OWNER_IDS', '809546777').split(' ')] # Your Telegram ID / Can be more than 1 ids
 except ValueError:
     OWNER_IDS = ''
-MONGODB = os.environ('MONGO_DB_URL', 'mongodb+srv://Jijin0078:Jijin0078@cluster0.nbtkq0p.mongodb.net/?retryWrites=true&w=majority') # Your Mongo DB URL
+MONGODB = os.environ.get('MONGO_DB_URL', 'mongodb+srv://Jijin0078:Jijin0078@cluster0.nbtkq0p.mongodb.net/?retryWrites=true&w=majority') # Your Mongo DB URL
 
 if MONGODB:
     db = motor_asyncio.AsyncIOMotorClient(MONGODB)['spotifyloader']['users']
